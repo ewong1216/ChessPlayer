@@ -1,6 +1,6 @@
 package model.pieces;
 
-import model.pieces.Square;
+import model.Square;
 
 public abstract class ChessPiece {
     protected int color;

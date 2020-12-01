@@ -1,5 +1,7 @@
 package model.pieces;
 
+import model.Square;
+
 public class Bishop extends ChessPiece {
     public Bishop(char color) {
         super(color);

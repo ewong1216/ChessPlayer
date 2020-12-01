@@ -1,4 +1,6 @@
-package model.pieces;
+package model;
+
+import model.pieces.ChessPiece;
 
 public class Square {
     private int file;

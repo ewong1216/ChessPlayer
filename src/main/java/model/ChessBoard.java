@@ -6,7 +6,6 @@ import model.pieces.Knight;
 import model.pieces.Pawn;
 import model.pieces.Queen;
 import model.pieces.Rook;
-import model.pieces.Square;
 
 public class ChessBoard {
     private Square[][] board;
@@ -22,6 +21,10 @@ public class ChessBoard {
         }
         createNonPawns(0, 'w');
         createNonPawns(7, 'b');
+    }
+
+    public ChessBoard(Square[][] board) {
+        this.board = board;
     }
 
     private void createNonPawns(int rank, char color) {
