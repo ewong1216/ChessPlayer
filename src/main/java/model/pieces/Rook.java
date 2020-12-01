@@ -1,7 +1,7 @@
-package Model;
+package model.pieces;
 
-public class Knight extends ChessPiece{
-    public Knight(char color) {
+public class Rook extends ChessPiece {
+    public Rook(char color) {
         super(color);
     }
 
@@ -15,9 +15,9 @@ public class Knight extends ChessPiece{
 
     public String toString() {
         if(super.color == 'w') {
-            return "n";
+            return "r";
         } else {
-            return "N";
+            return "R";
         }
     }
 }

@@ -1,4 +1,4 @@
-package Model;
+package model.pieces;
 
 public class Square {
     private int file;

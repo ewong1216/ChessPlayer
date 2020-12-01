@@ -1,4 +1,12 @@
-package Model;
+package model;
+
+import model.pieces.Bishop;
+import model.pieces.King;
+import model.pieces.Knight;
+import model.pieces.Pawn;
+import model.pieces.Queen;
+import model.pieces.Rook;
+import model.pieces.Square;
 
 public class ChessBoard {
     private Square[][] board;

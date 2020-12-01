@@ -1,6 +1,6 @@
-package Model;
+package model.pieces;
 
-public class Bishop extends ChessPiece{
+public class Bishop extends ChessPiece {
     public Bishop(char color) {
         super(color);
     }
