@@ -9,12 +9,16 @@ public class Bishop extends ChessPiece{
         return false;
     }
 
+    public boolean canCapture(Square start, Square enemy) {
+        return false;
+    }
+
     public void moveTo(Square square) {
 
     }
 
     public String toString() {
-        if(super.color == 'w') {
+        if(super.getColor() == 'w') {
             return "b";
         } else {
             return "B";

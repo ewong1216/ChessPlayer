@@ -7,7 +7,21 @@ public class Pawn extends ChessPiece {
     }
 
     public boolean canMoveTo(Square start, Square finish) {
-        return false;
+        if(finish.isOccupied()) {
+            return false;
+        } else if(finish.getRank() == start.getRank() + 1) {
+            return true;
+        } else if(!super.hasMoved() && finish.getRank() == start.getRank() + 2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean canCapture(Square start, Square enemy) {
+        if(super.getColor() == 'w') {
+
+        }
     }
 
     public void moveTo(Square square) {
@@ -15,7 +29,7 @@ public class Pawn extends ChessPiece {
     }
 
     public String toString() {
-        if(super.color == 'w') {
+        if(super.getColor() == 'w') {
             return "p";
         } else {
             return "P";

@@ -24,6 +24,13 @@ public class Square {
         return piece != null;
     }
 
+    public int getFile(){
+        return file;
+    }
+
+    public int getRank(){
+        return rank;
+    }
     public String toString(){
         if(isOccupied()) {
             return piece.toString();
