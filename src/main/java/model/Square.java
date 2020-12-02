@@ -1,9 +1,11 @@
-package Model;
+package model;
+
+import model.pieces.ChessPiece;
 
 public class Square {
-    private int file;
-    private int rank;
 
+    private final int file;
+    private final int rank;
     private ChessPiece piece;
 
     public Square(int file, int rank) {

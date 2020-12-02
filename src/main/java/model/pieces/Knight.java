@@ -1,7 +1,9 @@
-package Model;
+package model.pieces;
 
-public class Queen extends ChessPiece{
-    public Queen(char color) {
+import model.Square;
+
+public class Knight extends ChessPiece {
+    public Knight(char color) {
         super(color);
     }
 
@@ -19,9 +21,9 @@ public class Queen extends ChessPiece{
 
     public String toString() {
         if(super.getColor() == 'w') {
-            return "q";
+            return "n";
         } else {
-            return "Q";
+            return "N";
         }
     }
 }

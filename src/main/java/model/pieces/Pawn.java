@@ -1,4 +1,6 @@
-package Model;
+package model.pieces;
+
+import model.Square;
 
 public class Pawn extends ChessPiece {
 

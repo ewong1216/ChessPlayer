@@ -1,6 +1,8 @@
-package Model;
+package model.pieces;
 
-public class King extends ChessPiece{
+import model.Square;
+
+public class King extends ChessPiece {
     public King(char color) {
         super(color);
     }
