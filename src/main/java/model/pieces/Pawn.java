@@ -11,19 +11,33 @@ public class Pawn extends ChessPiece {
     public boolean canMoveTo(Square start, Square finish) {
         if(finish.isOccupied()) {
             return false;
-        } else if(finish.getRank() == start.getRank() + 1) {
+        } else if(finish.getRank() == start.getRank() + move(1)) {
             return true;
-        } else if(!super.hasMoved() && finish.getRank() == start.getRank() + 2) {
+        } else if(!super.hasMoved() && finish.getRank() == start.getRank() + move(2)) {
             return true;
         } else {
             return false;
         }
     }
 
-    public boolean canCapture(Square start, Square enemy) {
-        if(super.getColor() == 'w') {
-
+    private int move(int numSquares) {
+        if(super.getColor() == 'w'){
+            return numSquares;
+        } else {
+            return -numSquares;
         }
+    }
+
+    public boolean canCapture(Square start, Square enemy) {
+        if(enemy.getRank() == start.getRank() + move(1) && Math.abs(start.getFile() - enemy.getFile()) == 1) {
+            return true;
+        } else {
+            return canEnPassant(start, enemy);
+        }
+    }
+
+    private boolean canEnPassant(Square start, Square enemy) {
+        throw new UnsupportedOperationException();
     }
 
     public void moveTo(Square square) {
