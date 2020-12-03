@@ -91,20 +91,33 @@ public class ChessBoardFactory {
      * @return the piece corresponding to the piece, if no piece exists, null is returned.
      */
     private static ChessPiece createPiece(int pieceInt) {
-        return switch (pieceInt) {
-            case W_PAWN -> new Pawn('w');
-            case W_ROOK -> new Rook('w');
-            case W_KNIGHT -> new Knight('w');
-            case W_BISHOP -> new Bishop('w');
-            case W_KING -> new King('w');
-            case W_QUEEN -> new Queen('w');
-            case B_PAWN -> new Pawn('b');
-            case B_ROOK -> new Rook('b');
-            case B_KNIGHT -> new Knight('b');
-            case B_BISHOP -> new Bishop('b');
-            case B_QUEEN -> new Queen('b');
-            case B_KING -> new King('b');
-            default -> null;
-        };
+        switch (pieceInt) {
+            case W_PAWN:
+                return new Pawn('w');
+            case W_ROOK:
+                return new Rook('w');
+            case W_KNIGHT:
+                return new Knight('w');
+            case W_BISHOP:
+                return new Bishop('w');
+            case W_KING:
+                return new King('w');
+            case W_QUEEN:
+                return new Queen('w');
+            case B_PAWN:
+                return new Pawn('b');
+            case B_ROOK:
+                return new Rook('b');
+            case B_KNIGHT:
+                return new Knight('b');
+            case B_BISHOP:
+                return new Bishop('b');
+            case B_QUEEN:
+                return new Queen('b');
+            case B_KING:
+                return new King('b');
+            default:
+                return null;
+        }
     }
 }

@@ -49,15 +49,10 @@ public class Square {
     /**
      * Returns a reference to the ChessPiece located on this Square.
      *
-     * @throws IllegalStateException if there is no ChessPiece on this Square.
      * @return the ChessPiece located on this Square.
      */
-    public ChessPiece piece() {
-        if(!isOccupied()) {
-            throw new IllegalStateException("No ChessPiece on this Square");
-        } else {
-            return piece;
-        }
+    public ChessPiece getPiece() {
+        return piece;
     }
 
     /**
