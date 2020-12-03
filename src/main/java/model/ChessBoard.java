@@ -7,6 +7,10 @@ public class ChessBoard {
         this.board = board;
     }
 
+    public Square[][] getBoard() {
+        return board;
+    }
+
     public String toString(){
         StringBuilder result = new StringBuilder();
         for(int rank = 7; rank > -1; rank--) {

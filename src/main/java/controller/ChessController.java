@@ -1,8 +1,8 @@
 package controller;
 
-import model.ChessBoard;
 import model.ChessBoardFactory;
 import model.ChessGame;
+import view.ChessView;
 
 public class ChessController {
 
@@ -14,6 +14,7 @@ public class ChessController {
 
     private ChessController() {
         game = new ChessGame(ChessBoardFactory.createNormalBoard());
+        ChessView chessView = new ChessView(game.getBoard().getBoard());
         System.out.println(game.getBoard().toString());
     }
 }
