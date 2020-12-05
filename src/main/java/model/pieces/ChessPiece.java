@@ -1,6 +1,8 @@
 package model.pieces;
 
+import model.ChessBoard;
 import model.Square;
+import java.util.Set;
 
 /**
  * Represents an abstract ChessPiece object. All specialized chess pieces inherit
@@ -29,22 +31,23 @@ public abstract class ChessPiece {
     }
 
     /**
-     * Determines whether this piece can make the given move.
+     * Calculates all of the possible moves this Piece can make with the given starting
+     * position and state of the chess board.
      *
-     * @param start the square from which the piece starts.
-     * @param finish the square that the piece is moving to.
-     * @return true if the piece can make the given move legally, false otherwise.
+     * @param start the Square this Piece is on.
+     * @param board the ChessBoard this Piece is in.
+     * @return a Set<Square> of the possible moves this Piece can make.
      */
-    public abstract boolean canMoveTo(Square start, Square finish);
+    public abstract Set<Square> possibleMoves(Square start, ChessBoard board);
 
     /**
-     * Determines whether this piece can perform the given capture.
+     * Calculates all of the pieces this piece can capture.
      *
      * @param start the square from which the piece starts.
-     * @param enemy the square where the enemy piece resides.
-     * @return true if the capture can be performed legally, false otherwise.
+     * @param board the chess board that this piece is on.
+     * @return a Set<Square> that contains all of the capturable enemy pieces.
      */
-    public abstract boolean canCapture(Square start, Square enemy);
+    public abstract Set<Square> possibleCaptures(Square start, ChessBoard board);
 
     /**
      * Returns if this piece has moved this game.
@@ -68,7 +71,5 @@ public abstract class ChessPiece {
     public char getColor() {
         return color;
     }
-
-    public abstract void moveTo(Square square);
 
 }
