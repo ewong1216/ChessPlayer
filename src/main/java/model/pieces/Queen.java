@@ -1,6 +1,9 @@
 package model.pieces;
 
+import model.ChessBoard;
 import model.Square;
+
+import java.util.Set;
 
 public class Queen extends ChessPiece {
     public Queen(char color) {
@@ -11,12 +14,13 @@ public class Queen extends ChessPiece {
         return false;
     }
 
-    public boolean canCapture(Square start, Square enemy) {
-        return false;
+    @Override
+    public Set<Square> possibleMoves(Square start, ChessBoard board) {
+        return null;
     }
 
-    public void moveTo(Square square) {
-
+    public Set<Square> possibleCaptures(Square start, ChessBoard board) {
+        return null;
     }
 
     public String toString() {

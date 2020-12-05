@@ -12,8 +12,7 @@ public class Square {
      * file 0-7 corresponds to a real life ChessBoard A-H.
      * rank 0-7 corresponds to a real life ChessBoard 1-8.
      */
-    private final int file;
-    private final int rank;
+    private ChessCoordinate location;
 
     /**
      * The ChessPiece that is located on this Square.
@@ -21,37 +20,35 @@ public class Square {
      */
     private ChessPiece piece;
 
-    /**
-     * Creates a new Square object with no piece on it.
-     * e.g. the Square C5 has file 2 and rank 4.
-     *
-     * @param file the file of the Square as an integer.
-     * @param rank the rank of the Square - 1.
-     */
-    public Square(int file, int rank) {
-        this(file, rank, null);
-    }
+//    /**
+//     * Creates a new Square object with no piece on it.
+//     * e.g. the Square C5 has file 2 and rank 4.
+//     *
+//     * @param file the file of the Square as an integer.
+//     * @param rank the rank of the Square - 1.
+//     */
+//    public Square(int file, int rank) {
+//        this(file, rank, null);
+//    }
 
     /**
      * Creates a new Square object with the given piece located on it.
      * e.g. the Square C5 has file 2 and rank 4.
      *
-     * @param file the file of the Square as an integer.
-     * @param rank the rank of the Square - 1.
+     * @param location the ChessCoordinate of this Square.
      * @param piece the piece located on this Square.
      */
-    public Square(int file, int rank, ChessPiece piece) {
-        this.file = file;
-        this.rank = rank;
+    public Square(ChessCoordinate location, ChessPiece piece) {
+        this.location = location;
         this.piece = piece;
     }
 
     /**
      * Returns a reference to the ChessPiece located on this Square.
      *
-     * @return the ChessPiece located on this Square.
+     * @return the ChessPiece located on this Square, null if no piece on this square.
      */
-    public ChessPiece getPiece() {
+    public ChessPiece piece() {
         return piece;
     }
 
@@ -71,12 +68,21 @@ public class Square {
     }
 
     /**
+     * Determines if this Square is occupied by a piece of opposite color of the given color.
+     * @param color the color to compare to this Square's Piece's color.
+     * @return true if the colors are opposite, false if they are the same.
+     */
+    public boolean isEnemyOccupied(char color){
+        return isOccupied() && piece.getColor() != color;
+    }
+
+    /**
      * Returns the file of this Square.
      * 0-7 corresponds with the A-H files on a ChessBoard.
      * @return a file between [0,7]
      */
     public int getFile(){
-        return file;
+        return location.getFile();
     }
 
     /**
@@ -85,7 +91,7 @@ public class Square {
      * @return a rank between [0,7]
      */
     public int getRank(){
-        return rank;
+        return location.getRank();
     }
 
     /**
@@ -102,4 +108,19 @@ public class Square {
         }
     }
 
+    /**
+     * Determines if this Square and the other Object are equal.
+     * @param other the Object to compare to.
+     * @return true if other is a Square object and the two Squares have the same file and rank.
+     */
+    public boolean equals(Object other){
+        if(this == other){
+            return true;
+        } else if(other.getClass() != Square.class){
+            return false;
+        } else {
+            Square otherSquare = (Square) other;
+            return location.equals(otherSquare.location);
+        }
+    }
 }

@@ -1,6 +1,9 @@
 package model.pieces;
 
+import model.ChessBoard;
 import model.Square;
+
+import java.util.Set;
 
 public class Bishop extends ChessPiece {
     public Bishop(char color) {
@@ -11,13 +14,15 @@ public class Bishop extends ChessPiece {
         return false;
     }
 
-    public boolean canCapture(Square start, Square enemy) {
-        return false;
+    @Override
+    public Set<Square> possibleMoves(Square start, ChessBoard board) {
+        return null;
     }
 
-    public void moveTo(Square square) {
-
+    public Set<Square> possibleCaptures(Square start, ChessBoard board) {
+        return null;
     }
+
 
     public String toString() {
         if(super.getColor() == 'w') {
