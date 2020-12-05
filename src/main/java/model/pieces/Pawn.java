@@ -75,7 +75,7 @@ public class Pawn extends ChessPiece {
 
         Square movedLast = board.getMovedLast();
         int fileDistance = enPassantFileDistance(start, movedLast);
-        if(movedLast.piece().getClass() == Pawn.class && movedLast.isEnemyOccupied(super.getColor()) && Math.abs(fileDistance) == 1){
+        if(movedLast.getPiece().getClass() == Pawn.class && movedLast.isEnemyOccupied(super.getColor()) && Math.abs(fileDistance) == 1){
             if(fileDistance == 1){
                 possibleCaptures.add(rightDiagonal);
             } else if(fileDistance == -1){

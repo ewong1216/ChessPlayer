@@ -33,7 +33,7 @@ public class ChessBoard {
         int blackPieceCount = 0;
         for(int file = 0; file < 8; file++){
             for(int rank = 0; rank < 8; rank++){
-                ChessPiece piece = board[file][rank].piece();
+                ChessPiece piece = board[file][rank].getPiece();
                 if(piece != null){
                     if(piece.getColor() == 'w'){
                         tempPieces[0][whitePieceCount] = piece;
@@ -92,6 +92,10 @@ public class ChessBoard {
         result.append(" ----------------\n");
         result.append("  A B C D E F G H");
         return result.toString();
+    }
+
+    public Square[][] getBoard(){
+        return board;
     }
 
     /**
