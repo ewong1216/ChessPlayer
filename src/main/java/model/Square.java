@@ -48,7 +48,7 @@ public class Square {
      *
      * @return the ChessPiece located on this Square, null if no piece on this square.
      */
-    public ChessPiece piece() {
+    public ChessPiece getPiece() {
         return piece;
     }
 
