@@ -3,6 +3,7 @@ package model.pieces;
 import model.ChessBoard;
 import model.Square;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Bishop extends ChessPiece {
@@ -16,11 +17,22 @@ public class Bishop extends ChessPiece {
 
     @Override
     public Set<Square> possibleMoves(Square start, ChessBoard board) {
-        return null;
+        Set<Square> possibleMoves = new HashSet<>();
+        possibleMoves.addAll(checkMovesInDirection(start, board,1,1));
+        possibleMoves.addAll(checkMovesInDirection(start, board,1,-1));
+        possibleMoves.addAll(checkMovesInDirection(start, board,-1,1));
+        possibleMoves.addAll(checkMovesInDirection(start, board,-1,-1));
+        return possibleMoves;
     }
 
+    @Override
     public Set<Square> possibleCaptures(Square start, ChessBoard board) {
-        return null;
+        Set<Square> possibleCaptures = new HashSet<>();
+        checkCaptureInDirection(start, board,1,1,possibleCaptures);
+        checkCaptureInDirection(start, board,1,-1,possibleCaptures);
+        checkCaptureInDirection(start, board,-1,1,possibleCaptures);
+        checkCaptureInDirection(start, board,-1,-1,possibleCaptures);
+        return possibleCaptures;
     }
 
 

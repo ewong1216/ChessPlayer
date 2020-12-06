@@ -14,6 +14,9 @@ public class Testing {
         intboard[1][5] = ChessBoardFactory.B_PAWN;
         intboard[1][4] = ChessBoardFactory.W_ROOK;
         intboard[1][0] = ChessBoardFactory.B_BISHOP;
+        intboard[4][3] = ChessBoardFactory.W_PAWN;
+        intboard[0][1] = ChessBoardFactory.W_ROOK;
+
 
         //Pawn moving and capturing test
 //        ChessBoard board = ChessBoardFactory.createChessBoard(intboard);
@@ -36,6 +39,14 @@ public class Testing {
         // Testing ChessBoard constructor
 //        ChessBoard board = ChessBoardFactory.createNormalBoard();
 //        ChessBoard board = ChessBoardFactory.createChessBoard(intboard);
+
+        // Testing Bishop moving, capturing.
+
+        ChessBoard board = ChessBoardFactory.createChessBoard(intboard);
+        System.out.println(board);
+        Square bishop = board.getSquare(1,0);
+        System.out.println(bishop.getPiece().possibleMoves(bishop,board));
+        System.out.println(bishop.getPiece().possibleCaptures(bishop,board));
 
     }
 
