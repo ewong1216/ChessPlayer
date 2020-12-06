@@ -1,5 +1,8 @@
 package model;
 
+import model.ChessBoard;
+import model.ChessBoardFactory;
+
 public class Testing {
 
     public static void main(String[] args){
@@ -14,6 +17,8 @@ public class Testing {
         intboard[1][5] = ChessBoardFactory.B_PAWN;
         intboard[1][4] = ChessBoardFactory.W_ROOK;
         intboard[1][0] = ChessBoardFactory.B_BISHOP;
+        intboard[4][3] = ChessBoardFactory.W_PAWN;
+        intboard[0][1] = ChessBoardFactory.W_ROOK;
 
         //Pawn moving and capturing test
 //        ChessBoard board = ChessBoardFactory.createChessBoard(intboard);
@@ -33,10 +38,35 @@ public class Testing {
 //        //rook.piece().possibleMoves(rook, board);
 //        System.out.println(rook.piece().possibleCaptures(rook,board));
 
-        // Testing ChessBoard constructor
+        // model.Testing ChessBoard constructor
 //        ChessBoard board = ChessBoardFactory.createNormalBoard();
+//        System.out.println(board);
 //        ChessBoard board = ChessBoardFactory.createChessBoard(intboard);
 
+        // model.Testing Bishop moving, capturing.
+//        ChessBoard board = ChessBoardFactory.createChessBoard(intboard);
+//        System.out.println(board);
+//        Square bishop = board.getSquare(1,0);
+//        System.out.println(bishop.getPiece().possibleMoves(bishop,board));
+//        System.out.println(bishop.getPiece().possibleCaptures(bishop,board));
+
+        // Testing ChessBoard.isSquareAttacked, King movement
+        intboard[3][3] = ChessBoardFactory.W_KING;
+        //intboard[4][5] = ChessBoardFactory.B_PAWN;
+        intboard[5][6] = ChessBoardFactory.B_BISHOP;
+        ChessBoard board = ChessBoardFactory.createChessBoard(intboard);
+        System.out.println(board);
+//        System.out.println(board.isSquareAttacked(board.getSquare(1, 1), 'w'));
+//        System.out.println(board.isSquareAttacked(board.getSquare(1, 2), 'w'));
+//        System.out.println(board.isSquareAttacked(board.getSquare(1, 3), 'w'));
+//        System.out.println(board.isSquareAttacked(board.getSquare(2, 1), 'w'));
+//        System.out.println(board.isSquareAttacked(board.getSquare(2, 3), 'w'));
+//        System.out.println(board.isSquareAttacked(board.getSquare(3, 1), 'w'));
+//        System.out.println(board.isSquareAttacked(board.getSquare(3, 2), 'w'));
+//        System.out.println(board.isSquareAttacked(board.getSquare(3, 3), 'w'));
+        Square king = board.getSquare(3, 3);
+        System.out.println(king.getPiece().possibleMoves(king, board));
+        System.out.println(king.getPiece().possibleCaptures(king, board));
     }
 
 }
