@@ -4,6 +4,7 @@ import model.ChessBoard;
 import model.Square;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -112,4 +113,16 @@ public abstract class ChessPiece {
         return color;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ChessPiece)) return false;
+        ChessPiece piece = (ChessPiece) o;
+        return color == piece.color && hasMoved == piece.hasMoved;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(color, hasMoved);
+    }
 }
