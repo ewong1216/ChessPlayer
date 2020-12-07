@@ -1,4 +1,5 @@
-package model;
+import model.ChessBoard;
+import model.ChessBoardFactory;
 
 public class Testing {
 
@@ -37,16 +38,16 @@ public class Testing {
 //        System.out.println(rook.piece().possibleCaptures(rook,board));
 
         // Testing ChessBoard constructor
-//        ChessBoard board = ChessBoardFactory.createNormalBoard();
+        ChessBoard board = ChessBoardFactory.createNormalBoard();
+        System.out.println(board);
 //        ChessBoard board = ChessBoardFactory.createChessBoard(intboard);
 
         // Testing Bishop moving, capturing.
-
-        ChessBoard board = ChessBoardFactory.createChessBoard(intboard);
-        System.out.println(board);
-        Square bishop = board.getSquare(1,0);
-        System.out.println(bishop.getPiece().possibleMoves(bishop,board));
-        System.out.println(bishop.getPiece().possibleCaptures(bishop,board));
+//        ChessBoard board = ChessBoardFactory.createChessBoard(intboard);
+//        System.out.println(board);
+//        Square bishop = board.getSquare(1,0);
+//        System.out.println(bishop.getPiece().possibleMoves(bishop,board));
+//        System.out.println(bishop.getPiece().possibleCaptures(bishop,board));
 
     }
 

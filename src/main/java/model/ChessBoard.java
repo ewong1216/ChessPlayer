@@ -20,6 +20,12 @@ public class ChessBoard {
     // pieces[2] stores black pawns, pieces[3] stores black non-pawns.
     private ChessPiece[][] pieces;
 
+    // Stores the Square of the piece that is doing the check. Null if no check.
+    private Square inCheck;
+
+    // Stores the color of which player's turn it is.
+    private char playerTurn;
+
     /**
      * Creates a new ChessBoard Object with the given Square[][].
      *
@@ -27,6 +33,8 @@ public class ChessBoard {
      */
     public ChessBoard(Square[][] board) {
         this.board = board;
+        playerTurn = 'w';
+        inCheck = null;
         pieces = new ChessPiece[4][8];
         ChessPiece[][] tempPieces = new ChessPiece[2][16];
         int whitePieceCount = 0;
@@ -135,5 +143,13 @@ public class ChessBoard {
      */
     public Square getMovedLast(){
         return movedLast;
+    }
+
+    /**
+     * Returns the Square of the piece that is checking.
+     * @return The Square on which the checking piece resides. Null if no check on the board.
+     */
+    public Square getInCheck(){
+        return inCheck;
     }
 }
