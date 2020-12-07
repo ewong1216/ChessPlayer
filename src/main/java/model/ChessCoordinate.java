@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class ChessCoordinate {
 
     private final int file;
@@ -19,14 +21,25 @@ public class ChessCoordinate {
         return rank;
     }
 
-    public boolean equals(Object other){
-        if(this == other){
-            return true;
-        } else if(other.getClass() != ChessCoordinate.class){
-            return false;
-        } else {
-            ChessCoordinate otherCoord = (ChessCoordinate) other;
-            return file == otherCoord.file && rank == otherCoord.rank;
-        }
+    @Override
+    public String toString() {
+        return "ChessCoordinate{" +
+                "file=" + file +
+                ", rank=" + rank +
+                '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(file, rank);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ChessCoordinate)) return false;
+        ChessCoordinate that = (ChessCoordinate) o;
+        return file == that.file &&
+                rank == that.rank;
     }
 }

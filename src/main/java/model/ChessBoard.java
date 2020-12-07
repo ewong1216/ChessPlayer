@@ -181,10 +181,11 @@ public class ChessBoard {
         return false;
     }
 
-    public void makeMove(String move){
+    public boolean makeMove(String move) {
         if(move.length() == 2){
             //TODO: this is a pawn move, ex. e4, c5, etc. Only pawn moves are 2 chars long.
         }
+        return false;
     }
 
     public void movePiece(Square end){
@@ -194,6 +195,16 @@ public class ChessBoard {
 
     public void tempSetMovedLast(Square square){
         movedLast = square;
+    }
+
+    /**
+     * Gets the piece at the given coordinate.
+     *
+     * @param coordinate any non-null coordinate.
+     * @return the piece at the given coordinate.
+     */
+    public ChessPiece getPieceOnSquare(ChessCoordinate coordinate) {
+        return board[coordinate.getFile()][coordinate.getRank()].getPiece();
     }
 
     /**
