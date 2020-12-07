@@ -16,8 +16,8 @@ public class ChessBoard {
     private Square movedLast;
 
     // Stores references to all of the pieces on the board. Captured pieces are null.
-    // pieces[0] stores white pawns, pieces[1] stores white non-pawns.
-    // pieces[2] stores black pawns, pieces[3] stores black non-pawns.
+    // pieces[0] stores white pawns, pieces[1] stores white non-pawns, pieces[2][0] stores the white King.
+    // pieces[3] stores black pawns, pieces[4] stores black non-pawns, pieces[5][0] stores the black King.
     private ChessPiece[][] pieces;
 
     // Stores the Square of the piece that is doing the check. Null if no check.
@@ -35,7 +35,7 @@ public class ChessBoard {
         this.board = board;
         playerTurn = 'w';
         inCheck = null;
-        pieces = new ChessPiece[4][8];
+        pieces = new ChessPiece[6][8];
         ChessPiece[][] tempPieces = new ChessPiece[2][16];
         int whitePieceCount = 0;
         int blackPieceCount = 0;
@@ -56,11 +56,23 @@ public class ChessBoard {
         sortPieces(tempPieces);
     }
 
+    /**
+     * Sorts the 2D array of pieces into the pieces field.
+     * @param tempPieces a 2D array of ChessPieces where tempPieces[0] holds the white pieces and
+     * tempPieces[1] holds the black pieces.
+     */
     private void sortPieces(ChessPiece[][] tempPieces){
         sortPieces(tempPieces, 0, 0);
-        sortPieces(tempPieces, 1,2);
+        sortPieces(tempPieces, 1,3);
     }
 
+    /**
+     * Sorts either the white pieces or black pieces into the pieces field.
+     * @param tempPieces a 2D array of ChessPieces where tempPieces[0] holds the white pieces and
+     * tempPieces[1] holds the black pieces.
+     * @param color 0 for white pieces, 1 for black pieces.
+     * @param piecesIndex Used to access the correct array in the 2D pieces array field.
+     */
     private void sortPieces(ChessPiece[][] tempPieces, int color, int piecesIndex){
         int numPawns = 0;
         int numPieces = 0;
@@ -71,9 +83,11 @@ public class ChessBoard {
             } else if(piece.getClass() == Pawn.class){
                 pieces[piecesIndex][numPawns] = piece;
                 numPawns++;
-            } else {
+            } else if(piece.getClass() != King.class){
                 pieces[piecesIndex+1][numPieces] = piece;
                 numPieces++;
+            } else{
+                pieces[piecesIndex+2][0] = piece;
             }
         }
     }
