@@ -164,13 +164,15 @@ public class ChessBoard {
                     break;
                 }
                 Set<Square> attacked;
+                ChessPiece tempPiece = square.getPiece();
+                square.setPiece(new Rook(color)); // Temporary give it a piece so the enemyPiece can detect a capture.
                 if(enemyPiece.getClass() == Pawn.class){
-                    square.setPiece(new Rook(color)); // Temporary give it a piece so the Pawn can detect a capture.
                     attacked = enemyPiece.possibleCaptures(enemyPieceSquare, this);
-                    square.setPiece(null); // Delete the temporary piece.
                 } else {
                     attacked = enemyPiece.possibleMoves(enemyPieceSquare, this);
+                    attacked.addAll(enemyPiece.possibleCaptures(enemyPieceSquare, this));
                 }
+                square.setPiece(tempPiece); // Replace the temporary piece.
                 if(attacked.contains(square)){
                     return true;
                 }

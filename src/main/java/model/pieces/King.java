@@ -33,7 +33,9 @@ public class King extends ChessPiece {
         Iterator<Square> iterator = possibleMoves.iterator();
         while(iterator.hasNext()){
             Square toCheck = iterator.next();
-            if(board.isSquareAttacked(toCheck, super.getColor())){
+            if(toCheck.getPiece() != null){
+                iterator.remove();
+            } else if(board.isSquareAttacked(toCheck, super.getColor())){
                 iterator.remove();
             }
         }
@@ -70,7 +72,24 @@ public class King extends ChessPiece {
      * @return a set of squares on which lie the capturable pieces. Returns an empty set if there are none.
      */
     public Set<Square> possibleCaptures(Square start, ChessBoard board) {
-        return null;
+        Set<Square> possibleCaptures = adjacentSquares(start, board);
+        Iterator<Square> iterator = possibleCaptures.iterator();
+        while(iterator.hasNext()){
+            Square toCheck = iterator.next();
+            if(toCheck.getPiece() == null){
+                iterator.remove(); // If no piece on the square, no capture.
+            } else {
+                ChessPiece temp = toCheck.getPiece();
+                if(temp.getColor() == super.getColor()){
+                    iterator.remove(); // If the piece is the same color, no capture.
+                } else {
+                    if(board.isSquareAttacked(toCheck, super.getColor())){
+                        iterator.remove(); // If the enemy piece is defended, no capture.
+                    }
+                }
+            }
+        }
+        return possibleCaptures;
     }
 
 

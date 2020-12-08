@@ -51,19 +51,22 @@ public class Testing {
 //        System.out.println(bishop.getPiece().possibleCaptures(bishop,board));
 
         // Testing ChessBoard.isSquareAttacked, King movement
-        intboard[2][2] = ChessBoardFactory.W_KING;
+        intboard[3][3] = ChessBoardFactory.W_KING;
+        //intboard[4][5] = ChessBoardFactory.B_PAWN;
+        intboard[5][6] = ChessBoardFactory.B_BISHOP;
         ChessBoard board = ChessBoardFactory.createChessBoard(intboard);
         System.out.println(board);
-        System.out.println(board.isSquareAttacked(board.getSquare(1, 1), 'w'));
-        System.out.println(board.isSquareAttacked(board.getSquare(1, 2), 'w'));
-        System.out.println(board.isSquareAttacked(board.getSquare(1, 3), 'w'));
-        System.out.println(board.isSquareAttacked(board.getSquare(2, 1), 'w'));
-        System.out.println(board.isSquareAttacked(board.getSquare(2, 3), 'w'));
-        System.out.println(board.isSquareAttacked(board.getSquare(3, 1), 'w'));
-        System.out.println(board.isSquareAttacked(board.getSquare(3, 2), 'w'));
-        System.out.println(board.isSquareAttacked(board.getSquare(3, 3), 'w'));
-        Square king = board.getSquare(2, 2);
+//        System.out.println(board.isSquareAttacked(board.getSquare(1, 1), 'w'));
+//        System.out.println(board.isSquareAttacked(board.getSquare(1, 2), 'w'));
+//        System.out.println(board.isSquareAttacked(board.getSquare(1, 3), 'w'));
+//        System.out.println(board.isSquareAttacked(board.getSquare(2, 1), 'w'));
+//        System.out.println(board.isSquareAttacked(board.getSquare(2, 3), 'w'));
+//        System.out.println(board.isSquareAttacked(board.getSquare(3, 1), 'w'));
+//        System.out.println(board.isSquareAttacked(board.getSquare(3, 2), 'w'));
+//        System.out.println(board.isSquareAttacked(board.getSquare(3, 3), 'w'));
+        Square king = board.getSquare(3, 3);
         System.out.println(king.getPiece().possibleMoves(king, board));
+        System.out.println(king.getPiece().possibleCaptures(king, board));
     }
 
 }
