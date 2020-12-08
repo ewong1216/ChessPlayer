@@ -3,6 +3,8 @@ package model.pieces;
 import model.ChessBoard;
 import model.Square;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -27,7 +29,38 @@ public class King extends ChessPiece {
      */
     @Override
     public Set<Square> possibleMoves(Square start, ChessBoard board) {
-        return null;
+        Set<Square> possibleMoves = adjacentSquares(start, board);
+        Iterator<Square> iterator = possibleMoves.iterator();
+        while(iterator.hasNext()){
+            Square toCheck = iterator.next();
+            if(board.isSquareAttacked(toCheck, super.getColor())){
+                iterator.remove();
+            }
+        }
+        //TODO: Castling
+        return possibleMoves;
+    }
+
+    /**
+     * Finds and returns the set of squares adjacent to the King.
+     *
+     * @param start the Square this King is on.
+     * @param board the ChessBoard this King is on.
+     * @return a set of Squares adjacent to this King.
+     */
+    private Set<Square> adjacentSquares(Square start, ChessBoard board){
+        Set<Square> adjacent = new HashSet<>();
+        for(int fileChange = -1; fileChange <= 1; fileChange++){
+            for(int rankChange = -1; rankChange <= 1; rankChange++){
+                if(fileChange != 0 || rankChange != 0) {
+                    Square toCheck = board.getSquare(start.getFile() + fileChange, start.getRank() + rankChange);
+                    if (toCheck != null) {
+                        adjacent.add(toCheck);
+                    }
+                }
+            }
+        }
+        return adjacent;
     }
 
     /**
@@ -40,13 +73,7 @@ public class King extends ChessPiece {
         return null;
     }
 
-//    private Square checkSquareInDirection(Square start, ChessBoard board, int fileChange, int rankChange){
-//        Square toCheck = board.getSquare(start.getFile() + fileChange, start.getRank() + rankChange);
-//        if(toCheck == null){
-//            return null;
-//        }
-//
-//    }
+
 
     public String toString() {
         if(super.getColor() == 'w') {

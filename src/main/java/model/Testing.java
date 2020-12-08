@@ -20,7 +20,6 @@ public class Testing {
         intboard[4][3] = ChessBoardFactory.W_PAWN;
         intboard[0][1] = ChessBoardFactory.W_ROOK;
 
-
         //Pawn moving and capturing test
 //        ChessBoard board = ChessBoardFactory.createChessBoard(intboard);
 //        board.tempSetMovedLast(board.getSquare(3,4));
@@ -40,8 +39,8 @@ public class Testing {
 //        System.out.println(rook.piece().possibleCaptures(rook,board));
 
         // model.Testing ChessBoard constructor
-        ChessBoard board = ChessBoardFactory.createNormalBoard();
-        System.out.println(board);
+//        ChessBoard board = ChessBoardFactory.createNormalBoard();
+//        System.out.println(board);
 //        ChessBoard board = ChessBoardFactory.createChessBoard(intboard);
 
         // model.Testing Bishop moving, capturing.
@@ -51,6 +50,20 @@ public class Testing {
 //        System.out.println(bishop.getPiece().possibleMoves(bishop,board));
 //        System.out.println(bishop.getPiece().possibleCaptures(bishop,board));
 
+        // Testing ChessBoard.isSquareAttacked, King movement
+        intboard[2][2] = ChessBoardFactory.W_KING;
+        ChessBoard board = ChessBoardFactory.createChessBoard(intboard);
+        System.out.println(board);
+        System.out.println(board.isSquareAttacked(board.getSquare(1, 1), 'w'));
+        System.out.println(board.isSquareAttacked(board.getSquare(1, 2), 'w'));
+        System.out.println(board.isSquareAttacked(board.getSquare(1, 3), 'w'));
+        System.out.println(board.isSquareAttacked(board.getSquare(2, 1), 'w'));
+        System.out.println(board.isSquareAttacked(board.getSquare(2, 3), 'w'));
+        System.out.println(board.isSquareAttacked(board.getSquare(3, 1), 'w'));
+        System.out.println(board.isSquareAttacked(board.getSquare(3, 2), 'w'));
+        System.out.println(board.isSquareAttacked(board.getSquare(3, 3), 'w'));
+        Square king = board.getSquare(2, 2);
+        System.out.println(king.getPiece().possibleMoves(king, board));
     }
 
 }

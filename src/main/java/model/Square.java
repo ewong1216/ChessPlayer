@@ -53,6 +53,15 @@ public class Square {
     }
 
     /**
+     * Used to set the ChessPiece field for the sole purpose of ChessBoard.isSquareAttacked.
+     *
+     * @param piece the temporary piece to allow Pawns to detect a capture.
+     */
+    public void setPiece(ChessPiece piece){
+        this.piece = piece;
+    }
+
+    /**
      * Removes the ChessPiece from this Square.
      */
     public void clear(){
