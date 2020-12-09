@@ -3,6 +3,7 @@ package controller;
 import model.ChessBoardFactory;
 import model.ChessCoordinate;
 import model.ChessGame;
+import model.Move;
 import view.ChessPieceView;
 import view.ChessView;
 
@@ -55,13 +56,14 @@ public class ChessController implements MouseMotionListener, MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        System.out.println(chessView.getCoordinateOf(e.getComponent(), e.getX(), e.getY()));
         ChessCoordinate endCoordinate = chessView.getCoordinateOf(e.getComponent(),
                 e.getX(), e.getY());
 
-        game.makeMove(startCoordinate, endCoordinate);
-
-        chessView.updateScreen(game.getLastMove());
+        Move lastMove = null;
+        if (game.makeMove(startCoordinate, endCoordinate)) {
+            lastMove = game.getLastMove();
+        }
+        chessView.updateScreen(lastMove);
     }
 
     @Override

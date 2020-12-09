@@ -53,7 +53,9 @@ public class ChessView extends JFrame {
     }
 
     public void updateScreen(Move move) {
-        boardView.updateBoard(move);
+        if (move != null) {
+            boardView.updateBoard(move);
+        }
         this.pack();
     }
 
