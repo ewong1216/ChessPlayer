@@ -5,15 +5,12 @@ import model.Move;
 import model.Square;
 import model.pieces.ChessPiece;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.OverlayLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * This class is capable of creating a JPanel that shows a
@@ -25,7 +22,6 @@ public class ChessBoardView extends JPanel {
     private final JPanel squaresPanel;
     // The panel that contains the pieces.
     private final JPanel piecesPanel;
-    private final Map<ChessPiece, ChessPieceView> piecePieceViewMap;
 
     /**
      * Creates a new ChessBoardView from the given board,
@@ -40,19 +36,24 @@ public class ChessBoardView extends JPanel {
         this.setLayout(new OverlayLayout(this));
         squaresPanel = new JPanel(new GridLayout(8, 8));
         piecesPanel = new JPanel(new GridLayout(8, 8));
-        piecePieceViewMap = new HashMap<>();
         initBoardView(board, mouseListener, motionListener);
     }
 
+    /**
+     * Updates the BoardView from the given move.
+     *
+     * @param move the last move made.
+     */
     public void updateBoard(Move move) {
         if (move != null) {
             if (move.doesCapture()) {
-                ChessPieceView capturedPiece = piecePieceViewMap.get(move.getMovingPiece());
-                capturedPiece.capture();
+                ((ChessPieceView) piecesPanel
+                        .getComponent(getZOrder(move.getCapturedStartCoordinate()))).capture();
             }
-            ChessPieceView movingPiece = piecePieceViewMap.get(move.getMovingPiece());
-            int movingPieceZOrder = piecesPanel.getComponentZOrder(movingPiece);
+            int movingPieceZOrder = getZOrder(move.getStartCoordinate());
             int endSquarePieceZOrder = getZOrder(move.getEndCoordinate());
+            ChessPieceView movingPiece = (ChessPieceView) piecesPanel
+                    .getComponent(movingPieceZOrder);
             ChessPieceView endSquarePiece = (ChessPieceView) piecesPanel
                     .getComponent(endSquarePieceZOrder);
             piecesPanel.setComponentZOrder(movingPiece, endSquarePieceZOrder);
@@ -60,6 +61,12 @@ public class ChessBoardView extends JPanel {
         }
     }
 
+    /**
+     * Returns the ZOrder of the piece on the given ChessCoordinate.
+     *
+     * @param coordinate the chessCoordinate to get the ZOrder of
+     * @return the ZOrder of the piece on the given coordinate
+     */
     private static int getZOrder(ChessCoordinate coordinate) {
         return (7 - coordinate.getRank()) * 8 + coordinate.getFile();
     }
@@ -79,7 +86,6 @@ public class ChessBoardView extends JPanel {
             for (int file = 0; file < 8; file++) {
                 ChessPiece piece = board[file][rank].getPiece();
                 ChessPieceView pieceView = makePieceView(piece, mouseListener, motionListener);
-                piecePieceViewMap.put(piece, pieceView);
                 piecesPanel.add(pieceView);
                 squaresPanel.add(makeSquare(rank, file));
             }

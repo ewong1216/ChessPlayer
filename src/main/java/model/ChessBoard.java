@@ -181,11 +181,8 @@ public class ChessBoard {
         return false;
     }
 
-    public boolean makeMove(String move) {
-        if(move.length() == 2){
-            //TODO: this is a pawn move, ex. e4, c5, etc. Only pawn moves are 2 chars long.
-        }
-        return false;
+    public Move makeMove(Square startSquare, Square endSquare) {
+        return null;
     }
 
     public void movePiece(Square end){
