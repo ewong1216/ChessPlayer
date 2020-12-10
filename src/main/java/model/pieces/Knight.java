@@ -58,15 +58,7 @@ public class Knight extends ChessPiece {
      */
     public Set<Square> possibleMoves(Square start, ChessBoard board) {
         Set<Square> possibleMoves = viableSquares(start, board);
-        Iterator<Square> iterator = possibleMoves.iterator();
-        while(iterator.hasNext()){
-            Square toCheck = iterator.next();
-            if(toCheck.getPiece() != null){
-                iterator.remove();
-            } else if(board.isSquareAttacked(toCheck, super.getColor())){
-                iterator.remove();
-            }
-        }
+        possibleMoves.removeIf(toCheck -> toCheck.getPiece() != null);
         return possibleMoves;
     }
 
