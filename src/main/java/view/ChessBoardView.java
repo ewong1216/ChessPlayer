@@ -4,6 +4,7 @@ import model.ChessCoordinate;
 import model.Move;
 import model.Square;
 import model.pieces.ChessPiece;
+import model.pieces.King;
 
 import javax.swing.JPanel;
 import javax.swing.OverlayLayout;
@@ -49,16 +50,28 @@ public class ChessBoardView extends JPanel {
             if (move.doesCapture()) {
                 ((ChessPieceView) piecesPanel
                         .getComponent(getZOrder(move.getCapturedStartCoordinate()))).capture();
+            } else if (isCastleMove(move)) {
+                int rookRank = (move.getMovingPiece().getColor() == 'w') ? 0 : 7;
+                boolean castlesLeft = move.getEndCoordinate().getFile() == 2;
+                int rookStartFile = castlesLeft ? 0 : 7;
+                int rookEndFile = castlesLeft ? 3 : 5;
+                swap(new ChessCoordinate(rookStartFile, rookRank),
+                        new ChessCoordinate(rookEndFile, rookRank));
             }
-            int movingPieceZOrder = getZOrder(move.getStartCoordinate());
-            int endSquarePieceZOrder = getZOrder(move.getEndCoordinate());
-            ChessPieceView movingPiece = (ChessPieceView) piecesPanel
-                    .getComponent(movingPieceZOrder);
-            ChessPieceView endSquarePiece = (ChessPieceView) piecesPanel
-                    .getComponent(endSquarePieceZOrder);
-            piecesPanel.setComponentZOrder(movingPiece, endSquarePieceZOrder);
-            piecesPanel.setComponentZOrder(endSquarePiece, movingPieceZOrder);
+            swap(move.getStartCoordinate(), move.getEndCoordinate());
         }
+    }
+
+    /**
+     * Returns whether or not the given move is a castle move or not.
+     *
+     * @param move the move to check.
+     * @return whether or not the move is a castle move
+     */
+    private boolean isCastleMove(Move move) {
+        return move.getMovingPiece() instanceof King
+                && Math.abs(move.getStartCoordinate().getFile() - move.getEndCoordinate().getFile())
+                == 2;
     }
 
     /**
@@ -69,6 +82,17 @@ public class ChessBoardView extends JPanel {
      */
     private static int getZOrder(ChessCoordinate coordinate) {
         return (7 - coordinate.getRank()) * 8 + coordinate.getFile();
+    }
+
+    private void swap(ChessCoordinate coordinate1, ChessCoordinate coordinate2) {
+        int movingPieceZOrder = getZOrder(coordinate1);
+        int endSquarePieceZOrder = getZOrder(coordinate2);
+        ChessPieceView movingPiece = (ChessPieceView) piecesPanel
+                .getComponent(movingPieceZOrder);
+        ChessPieceView endSquarePiece = (ChessPieceView) piecesPanel
+                .getComponent(endSquarePieceZOrder);
+        piecesPanel.setComponentZOrder(movingPiece, endSquarePieceZOrder);
+        piecesPanel.setComponentZOrder(endSquarePiece, movingPieceZOrder);
     }
 
     /**
