@@ -20,16 +20,6 @@ public class Square {
      */
     private ChessPiece piece;
 
-//    /**
-//     * Creates a new Square object with no piece on it.
-//     * e.g. the Square C5 has file 2 and rank 4.
-//     *
-//     * @param file the file of the Square as an integer.
-//     * @param rank the rank of the Square - 1.
-//     */
-//    public Square(int file, int rank) {
-//        this(file, rank, null);
-//    }
 
     /**
      * Creates a new Square object with the given piece located on it.
@@ -52,6 +42,9 @@ public class Square {
         return piece;
     }
 
+    public ChessCoordinate getCoordinate(){
+        return location;
+    }
     /**
      * Used to set the ChessPiece field for the sole purpose of ChessBoard.isSquareAttacked.
      *

@@ -51,11 +51,11 @@ public class Testing {
 //        System.out.println(bishop.getPiece().possibleCaptures(bishop,board));
 
         // Testing ChessBoard.isSquareAttacked, King movement
-        intboard[3][3] = ChessBoardFactory.W_KING;
+//        intboard[3][3] = ChessBoardFactory.W_KING;
         //intboard[4][5] = ChessBoardFactory.B_PAWN;
-        intboard[5][6] = ChessBoardFactory.B_BISHOP;
-        ChessBoard board = ChessBoardFactory.createChessBoard(intboard);
-        System.out.println(board);
+//        intboard[5][6] = ChessBoardFactory.B_BISHOP;
+//        ChessBoard board = ChessBoardFactory.createChessBoard(intboard);
+//        System.out.println(board);
 //        System.out.println(board.isSquareAttacked(board.getSquare(1, 1), 'w'));
 //        System.out.println(board.isSquareAttacked(board.getSquare(1, 2), 'w'));
 //        System.out.println(board.isSquareAttacked(board.getSquare(1, 3), 'w'));
@@ -64,9 +64,129 @@ public class Testing {
 //        System.out.println(board.isSquareAttacked(board.getSquare(3, 1), 'w'));
 //        System.out.println(board.isSquareAttacked(board.getSquare(3, 2), 'w'));
 //        System.out.println(board.isSquareAttacked(board.getSquare(3, 3), 'w'));
-        Square king = board.getSquare(3, 3);
-        System.out.println(king.getPiece().possibleMoves(king, board));
-        System.out.println(king.getPiece().possibleCaptures(king, board));
+//        Square king = board.getSquare(3, 3);
+//        System.out.println(king.getPiece().possibleMoves(king, board));
+//        System.out.println(king.getPiece().possibleCaptures(king, board));
+
+        // Testing moves while in check
+//        ChessBoard board = ChessBoardFactory.createNormalBoard();
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(4,1), board.getSquare(4,3));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(3,6), board.getSquare(3,4));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(4,3), board.getSquare(3,4));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(3,7), board.getSquare(3,4));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(1,0), board.getSquare(2,2));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(3,4), board.getSquare(3,7));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(5,0), board.getSquare(1,4));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(2,6), board.getSquare(2,5));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(1,4), board.getSquare(2,3));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(2,7), board.getSquare(6,3));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(3,0), board.getSquare(6,3));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(3,7), board.getSquare(3,5));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(6,3), board.getSquare(2,7));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(3,5), board.getSquare(3,7));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(2,3), board.getSquare(5,6));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(4,7), board.getSquare(5,6));
+//        System.out.println(board);
+
+        // Testing Castling
+//        ChessBoard board = ChessBoardFactory.createNormalBoard();
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(3,1), board.getSquare(3,3));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(3,6), board.getSquare(3,4));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(1,0), board.getSquare(2,2));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(1,7), board.getSquare(2,5));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(2,0), board.getSquare(5,3));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(2,7), board.getSquare(5,4));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(3,0), board.getSquare(3,1));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(3,7), board.getSquare(3,6));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(4,0), board.getSquare(2,0));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(4,7), board.getSquare(2,7));
+//        System.out.println(board);
+
+        // Testing promotion
+//        ChessBoard board = ChessBoardFactory.createNormalBoard();
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(4,1), board.getSquare(4,3));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(5,6), board.getSquare(5,4));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(4,3), board.getSquare(5,4));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(6,6), board.getSquare(6,5));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(5,4), board.getSquare(6,5));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(6,7), board.getSquare(5,5));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(6,5), board.getSquare(6,6));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(1,6), board.getSquare(1,5));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(6,6), board.getSquare(7,7));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(0,6), board.getSquare(0,5));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(7,7), board.getSquare(7,6));
+//        System.out.println(board);
+
+        // Testing bug
+//        ChessBoard board = ChessBoardFactory.createNormalBoard();
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(1,0), board.getSquare(2,2));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(5,6), board.getSquare(5,4));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(2,2), board.getSquare(1,0));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(5,4), board.getSquare(5,3));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(4,1), board.getSquare(4,3));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(5,3), board.getSquare(4,2));
+//        System.out.println(board);
+
+        // Testing moving King into check
+//        ChessBoard board = ChessBoardFactory.createNormalBoard();
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(6,0), board.getSquare(5,2));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(4,6), board.getSquare(4,4));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(5,2), board.getSquare(6,4));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(4,7), board.getSquare(4,6));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(0,1), board.getSquare(0,2));
+//        System.out.println(board);
+//        board.makeMove(board.getSquare(4,6), board.getSquare(4,5));
+//        System.out.println(board);
+
+
     }
 
 }

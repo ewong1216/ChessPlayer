@@ -75,7 +75,7 @@ public class Pawn extends ChessPiece {
 
         Square movedLast = board.getMovedLast();
         int fileDistance = enPassantFileDistance(start, movedLast);
-        if(movedLast.getPiece().getClass() == Pawn.class && movedLast.isEnemyOccupied(super.getColor()) && Math.abs(fileDistance) == 1){
+        if(movedLast.getPiece() != null && movedLast.getPiece().getClass() == Pawn.class && movedLast.isEnemyOccupied(super.getColor()) && Math.abs(fileDistance) == 1){
             if(fileDistance == 1){
                 possibleCaptures.add(rightDiagonal);
             } else if(fileDistance == -1){
@@ -84,15 +84,6 @@ public class Pawn extends ChessPiece {
         }
         return possibleCaptures;
     }
-
-//    /**
-//     * Determines whether this Pawn can make an En Passant capture.
-//     * TODO
-//     * @return true if the En Passant capture is legal, false if illegal.
-//     */
-//    private boolean enPassantRank(Square start, Square movedLast) {
-//        return enPassantFileDistance(start, movedLast) != 0;
-//    }
 
     /**
      * Used to determine whether this Pawn can perform an En Passant capture.
@@ -110,10 +101,6 @@ public class Pawn extends ChessPiece {
             return movedLast.getFile() - start.getFile();
         }
         return 0;
-    }
-
-    public void moveTo(Square square) {
-
     }
 
     /**
