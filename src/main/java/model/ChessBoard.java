@@ -1,6 +1,10 @@
 package model;
 
-import model.pieces.*;
+import model.pieces.ChessPiece;
+import model.pieces.King;
+import model.pieces.Pawn;
+import model.pieces.Queen;
+import model.pieces.Rook;
 
 import java.util.Set;
 
@@ -371,5 +375,4 @@ public class ChessBoard {
     public Square getMovedLast(){
         return movedLast;
     }
-
 }

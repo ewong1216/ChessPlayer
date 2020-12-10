@@ -15,13 +15,6 @@ public class ChessGame {
     private final ChessBoard board;
     private final List<Move> moveList;
     private char turn;
-    private boolean isOver;
-
-    // w = white won
-    // b = black won
-    // S = stalemate
-    // n = no winner
-    private char winner;
 
     /**
      * Instantiates a new ChessGame with the given board.
@@ -32,8 +25,6 @@ public class ChessGame {
         this.board = board;
         this.moveList = new ArrayList<>();
         this.turn = 'w';
-        this.isOver = false;
-        this.winner = 'n';
     }
 
     /**
@@ -49,7 +40,7 @@ public class ChessGame {
      */
     public boolean makeMove(ChessCoordinate startCoordinate, ChessCoordinate endCoordinate) {
         boolean didMove = false;
-        if (!isOver && !startCoordinate.equals(endCoordinate)) {
+        if (!startCoordinate.equals(endCoordinate)) {
             ChessPiece piece = board.getPieceOnSquare(startCoordinate);
             if (piece != null && piece.getColor() == turn) {
                 Move lastMove = board.makeMove(
@@ -59,22 +50,10 @@ public class ChessGame {
                     didMove = true;
                     turn = (turn == 'w') ? 'b' : 'w';
                     moveList.add(lastMove);
-                    isOver = checkGameOver();
                 }
             }
         }
         return didMove;
-    }
-
-    /**
-     * Checks if the game is over. If yes, returns true and
-     * properly updates 'winner' field.
-     *
-     * @return whether the game is over or not.
-     */
-    private boolean checkGameOver() {
-        // TODO: Check game over
-        return false;
     }
 
     /**
