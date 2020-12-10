@@ -35,11 +35,8 @@ public class King extends ChessPiece {
             Square toCheck = iterator.next();
             if(toCheck.getPiece() != null){
                 iterator.remove();
-            } else if(board.isSquareAttacked(toCheck, super.getColor())){
-                iterator.remove();
             }
         }
-        //TODO: Castling
         return possibleMoves;
     }
 
@@ -82,17 +79,11 @@ public class King extends ChessPiece {
                 ChessPiece temp = toCheck.getPiece();
                 if(temp.getColor() == super.getColor()){
                     iterator.remove(); // If the piece is the same color, no capture.
-                } else {
-                    if(board.isSquareAttacked(toCheck, super.getColor())){
-                        iterator.remove(); // If the enemy piece is defended, no capture.
-                    }
                 }
             }
         }
         return possibleCaptures;
     }
-
-
 
     public String toString() {
         if(super.getColor() == 'w') {

@@ -22,12 +22,6 @@ public class ChessBoard {
     // pieces[3] stores black pawns, pieces[4] stores black non-pawns, pieces[5][0] stores the black King.
     private Square[][] pieces;
 
-    // Stores the Square of the piece that is doing the check. Null if no check.
-    private Square inCheck;
-
-    // Stores the color of which player's turn it is.
-    private char playerTurn;
-
     /**
      * Creates a new ChessBoard Object with the given Square[][].
      *
@@ -35,8 +29,6 @@ public class ChessBoard {
      */
     public ChessBoard(Square[][] board) {
         this.board = board;
-        playerTurn = 'w';
-        inCheck = null;
         pieces = new Square[6][8];
         Square[][] tempPieces = new Square[2][16];
         int whitePieceCount = 0;
@@ -57,7 +49,7 @@ public class ChessBoard {
             }
         }
         sortPieces(tempPieces);
-        movedLast = getSquare(0, 1); //TODO: testing purposes, remove when done
+        movedLast = getSquare(0, 0);
     }
 
     /**
@@ -139,6 +131,10 @@ public class ChessBoard {
         }
     }
 
+    public Square getSquare(ChessCoordinate coords){
+        return getSquare(coords.getFile(), coords.getRank());
+    }
+
     /**
      * Determines whether the given square is attacked by the color opposite the given color.
      *
@@ -157,11 +153,11 @@ public class ChessBoard {
             for(int piece = 0; piece < 8; piece++){
                 Square enemyPieceSquare = pieces[piecesIndex][piece];
                 if(enemyPieceSquare == null){
-                    break;
+                    continue;
                 }
                 ChessPiece enemyPiece = enemyPieceSquare.getPiece();
                 if(enemyPiece == null){
-                    break;
+                    continue;
                 }
                 Set<Square> attacked;
                 ChessPiece tempPiece = square.getPiece();
@@ -181,17 +177,180 @@ public class ChessBoard {
         return false;
     }
 
-    public Move makeMove(Square startSquare, Square endSquare) {
-        return null;
+    public boolean areSquaresAttacked(char color, Square[] squares) {
+        for(Square square : squares){
+            if(isSquareAttacked(square, color)){
+                return true;
+            }
+        }
+        return false;
     }
 
-    public void movePiece(Square end){
-        //TODO: update movedLast
-        throw new UnsupportedOperationException();
+    public Move makeMove(Square start, Square end) {
+        boolean isCapture;
+        boolean isEnpassant = false;
+        char playerTurn = start.getPiece().getColor();
+        if(end.isOccupied()) {
+            isCapture = true;
+        } else if(start.getPiece().getClass() == Pawn.class && !end.isOccupied() && start.getFile() != end.getFile()){
+            isCapture = true; // En Passant
+            isEnpassant = true;
+        } else {
+            isCapture = false;
+        }
+
+        Move move = null;
+        if(isCapture && start.getPiece().possibleCaptures(start, this).contains(end)){ // If capture is valid
+            if(isEnpassant){
+                Square capturedPawn = getSquare(end.getFile(), end.getRank() + move(playerTurn));
+                move = new Move(start.getPiece(), capturedPawn.getPiece(), start.getCoordinate(), end.getCoordinate(), capturedPawn.getCoordinate());
+                removePiece(capturedPawn, capturedPawn.getPiece().getColor());
+                end.setPiece(start.getPiece());
+                capturedPawn.clear();
+            } else {
+                move = new Move(start.getPiece(), end.getPiece(), start.getCoordinate(), end.getCoordinate(), end.getCoordinate());
+                removePiece(end, end.getPiece().getColor());
+                end.setPiece(start.getPiece());
+                move.getMovingPiece().moved();
+            }
+            start.clear();
+            changePiecesReference(start, end);
+        } else if(start.getPiece().possibleMoves(start, this).contains(end)){ // If move is valid
+            move = new Move(start.getPiece(), null, start.getCoordinate(), end.getCoordinate(), null);
+            end.setPiece(start.getPiece());
+            start.clear();
+            changePiecesReference(start, end);
+        } else if(start.getPiece().getClass() == King.class && !start.getPiece().hasMoved()){ // Castling
+            int rank = start.getRank();
+            if(end.getRank() == rank && end.getFile() == start.getFile() + 2){ // King-side castling
+                Square[] toCheck = new Square[3];
+                toCheck[0] = start;
+                toCheck[1] = getSquare(start.getFile() + 1, rank);
+                toCheck[2] = end;
+                Square rook = getSquare(start.getFile() + 3, rank);
+                if(!toCheck[1].isOccupied() && !toCheck[2].isOccupied() && rook.isOccupied() && !rook.getPiece().hasMoved()){ // Can't castle through pieces
+                    if(!areSquaresAttacked(playerTurn, toCheck)){ // Can't castle while in check, through check, or into check.
+                        move = new Move(start.getPiece(), null,start.getCoordinate(),end.getCoordinate(),null);
+                        end.setPiece(start.getPiece());
+                        start.clear();
+                        changePiecesReference(start, end);
+                        toCheck[1].setPiece(rook.getPiece());
+                        rook.clear();
+                        changePiecesReference(rook,toCheck[1]);
+                    }
+                }
+            } else if(end.getRank() == rank && end.getFile() == start.getFile() - 2){ // Queen-side castling
+                Square[] toCheck = new Square[3];
+                toCheck[0] = start;
+                toCheck[1] = getSquare(start.getFile() - 1, rank);
+                toCheck[2] = end;
+                Square rook = getSquare(0, rank);
+                if(!toCheck[1].isOccupied() && !toCheck[2].isOccupied() && !getSquare(1, rank).isOccupied() &&
+                        rook.isOccupied() && !rook.getPiece().hasMoved()) { //Can't castle through pieces
+                    if(!areSquaresAttacked(playerTurn,toCheck)){
+                        move = new Move(start.getPiece(),null,start.getCoordinate(), end.getCoordinate(),null);
+                        end.setPiece(start.getPiece());
+                        start.clear();
+                        changePiecesReference(start, end);
+                        toCheck[1].setPiece(rook.getPiece());
+                        rook.clear();
+                        changePiecesReference(rook,toCheck[1]);
+                    }
+                }
+            }
+        }
+
+        if(move != null && isSquareAttacked(pieces[kingColorIndex(playerTurn)][0], playerTurn)){ // If the move/capture made created a check, reset.
+            start.setPiece(move.getMovingPiece()); // Reset moving piece
+            if(isEnpassant){
+                getSquare(end.getCoordinate()).clear();
+                Square capturedPawn = getSquare(move.getCapturedStartCoordinate());
+                capturedPawn.setPiece(move.getCapturedPiece());
+                addPieceBack(capturedPawn, capturedPawn.getPiece().getColor());
+            } else if(isCapture){
+                getSquare(end.getCoordinate()).setPiece(move.getCapturedPiece());
+                addPieceBack(end, end.getPiece().getColor());
+            } else {
+                end.clear();
+            }
+            changePiecesReference(end, start);
+            return null;
+        } else {
+            if(move != null) {
+                if(end.getPiece().getClass() == Pawn.class && (end.getRank() == 0 || end.getRank() == 7)) {
+                    end.setPiece(new Queen(end.getPiece().getColor()));
+                    move = new Move(end.getPiece(),move.getCapturedPiece(),move.getStartCoordinate(),move.getEndCoordinate(),move.getCapturedStartCoordinate());
+                }
+                end.getPiece().moved();
+                movedLast = end;
+            }
+            return move;
+        }
     }
 
-    public void tempSetMovedLast(Square square){
-        movedLast = square;
+    private void changePiecesReference(Square original, Square newSquare){
+        for(int piecetype = 0; piecetype < 6; piecetype++){
+            for(int i = 0; i < 8; i++){
+                Square toCheck = pieces[piecetype][i];
+                if(toCheck != null && toCheck.equals(original)){
+                    pieces[piecetype][i] = newSquare;
+                    return;
+                }
+            }
+        }
+    }
+    private void removePiece(Square piece, char color){
+        int index = 0;
+        if(color != 'w'){
+            index = 3;
+        }
+        for(int piecetype = 0; piecetype < 2; piecetype++){
+            for(int i = 0; i < 8; i++){
+                Square checkSquare = pieces[piecetype  + index][i];
+                if(checkSquare != null && checkSquare.equals(piece)) {
+                    pieces[piecetype  + index][i] = null;
+                    return;
+                }
+            }
+        }
+    }
+
+    private void addPieceBack(Square piece, char color){
+        int index = 0;
+        if(color != 'w'){
+            index = 3;
+        }
+        int piecetype = 0;
+        if(piece.getPiece().getClass() != Pawn.class) {
+            piecetype = 1;
+        }
+        for(int i = 0; i < 8; i++){
+            Square checkSquare = pieces[piecetype + index][i];
+            if(checkSquare == null) {
+                pieces[piecetype + index][i] = piece;
+                return;
+            }
+        }
+    }
+
+    private int kingColorIndex(char color){
+        if(color == 'w'){
+            return 2;
+        } else {
+            return 5;
+        }
+    }
+    /**
+     * Look for the pawn 1 behind the en passant square.
+     * @param color dictates which direction to get the Square with the pawn.
+     * @return -1 for white, 1 for black.
+     */
+    private int move(char color) {
+        if(color == 'w'){
+            return -1;
+        } else {
+            return 1;
+        }
     }
 
     /**
@@ -211,14 +370,6 @@ public class ChessBoard {
      */
     public Square getMovedLast(){
         return movedLast;
-    }
-
-    /**
-     * Returns the Square of the piece that is checking.
-     * @return The Square on which the checking piece resides. Null if no check on the board.
-     */
-    public Square getInCheck(){
-        return inCheck;
     }
 
 }

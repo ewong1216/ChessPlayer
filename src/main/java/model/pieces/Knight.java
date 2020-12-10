@@ -59,6 +59,13 @@ public class Knight extends ChessPiece {
     public Set<Square> possibleMoves(Square start, ChessBoard board) {
         Set<Square> possibleMoves = viableSquares(start, board);
         possibleMoves.removeIf(toCheck -> toCheck.getPiece() != null);
+        Iterator<Square> iterator = possibleMoves.iterator();
+        while(iterator.hasNext()){
+            Square toCheck = iterator.next();
+            if(toCheck.getPiece() != null){
+                iterator.remove();
+            }
+        }
         return possibleMoves;
     }
 
@@ -90,14 +97,14 @@ public class Knight extends ChessPiece {
 
     /**
      * Returns a String representation of this Knight
-     * @return "K" if a black rook, "k" if a white rook.
+     * @return "N" if a black Knight, "n" if a white Knight.
      */
 
     public String toString() {
         if(super.getColor() == 'w') {
-            return "k";
+            return "n";
         } else {
-            return "K";
+            return "N";
         }
     }
 }
