@@ -1,5 +1,7 @@
 # ChessPlayer
 
+### Video Guide Link: https://www.youtube.com/watch?v=-ldulNRzGU4&feature=youtu.be&ab_channel=KevinPaulsen
+
 ### Running the program
 This project is capable of creating a chessboard that can will be displayed as a Window on your 
 screen. To run this program, follow the following steps:
