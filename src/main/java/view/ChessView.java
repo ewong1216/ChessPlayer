@@ -6,7 +6,9 @@ import model.Move;
 import model.Square;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.MouseListener;
@@ -24,6 +26,7 @@ public class ChessView extends JFrame {
     private static final int STARTING_SIZE = 500;
 
     private final ChessBoardView boardView;
+    private final ChessTurnView turnView;
 
     /**
      * Creates a new ChessView that displays the given board. The
@@ -37,8 +40,10 @@ public class ChessView extends JFrame {
     public ChessView(Square[][] board, MouseListener mouseListener,
                      MouseMotionListener motionListener) {
         boardView = new ChessBoardView(board, mouseListener, motionListener);
+        turnView = new ChessTurnView('w');
         init();
         this.add(boardView, BorderLayout.CENTER);
+        this.add(turnView, BorderLayout.SOUTH);
     }
 
     /**
@@ -55,6 +60,7 @@ public class ChessView extends JFrame {
     public void updateScreen(Move move) {
         if (move != null) {
             boardView.updateBoard(move);
+            turnView.switchTurns();
         }
         this.pack();
     }
