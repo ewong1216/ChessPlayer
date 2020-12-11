@@ -24,13 +24,13 @@ We used a standard Model-View-Controller structure.
     care of all types of moves and captures, including special rules like castling, promotion (you can
     only promote to a `Queen` in this program due to time constraints), and en passant. 
     * `ChessGame`: Connects `ChessBoard` with the frontend. Takes care of information that is more 
-    broad than `ChessBoard`, such as the player's turn and the list of moves taken. 
+    broad than `ChessBoard`, such as the player's turn, and the list of moves taken. 
     * `ChessBoardFactory`: Used to make different `ChessBoard` instances. 
     * `Testing`: As the name suggest, used for testing after coding up major features.
 
-* View: Displays the `ChessBoard` with dragable pieces. Uses the java.swing and java.awt packages.
+* View: Displays the `ChessBoard` with draggable pieces. Uses the java.swing and java.awt packages.
     * `ChessView`: extends `JFrame` and is the main display on which the other Views are contained.
-    * `ChessBoardView`: Displays the 8x8 standard board and maintains a field to 
+    * `ChessBoardView`: This extends JPanel and displays the 8x8 standard board and maintains a field to 
     display the pieces on top of the squares. 
     * `ChessPieceView`: Takes care of displaying the correct piece. Handles cases including promotion,
     where the `Pawn` promotes to a `Queen`.
