@@ -47,6 +47,7 @@ public class ChessBoardView extends JPanel {
      */
     public void updateBoard(Move move) {
         if (move != null) {
+
             if (move.doesCapture()) {
                 ((ChessPieceView) piecesPanel
                         .getComponent(getZOrder(move.getCapturedStartCoordinate()))).capture();
@@ -59,7 +60,14 @@ public class ChessBoardView extends JPanel {
                         new ChessCoordinate(rookEndFile, rookRank));
             }
             swap(move.getStartCoordinate(), move.getEndCoordinate());
+            if (move.getIsPromotion()) {
+                makeQueen(move.getEndCoordinate(), move.getMovingPiece().getColor());
+            }
         }
+    }
+
+    private void makeQueen(ChessCoordinate coordinate, char color) {
+        ((ChessPieceView) piecesPanel.getComponent(getZOrder(coordinate))).makeQueen(color);
     }
 
     /**

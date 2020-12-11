@@ -64,6 +64,10 @@ public class ChessPieceView extends JLabel {
         return path.equals("images/") ? BLANK_IMAGE : new ImageIcon(path);
     }
 
+    public void makeQueen(char color) {
+        setIcon(new ImageIcon("images/" + color + "Queen.png"));
+    }
+
     public boolean isOnBoard() {
         return isOnBoard;
     }
