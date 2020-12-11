@@ -283,7 +283,8 @@ public class ChessBoard {
             if(move != null) {
                 if(end.getPiece().getClass() == Pawn.class && (end.getRank() == 0 || end.getRank() == 7)) {
                     end.setPiece(new Queen(end.getPiece().getColor()));
-                    move = new Move(end.getPiece(),move.getCapturedPiece(),move.getStartCoordinate(),move.getEndCoordinate(),move.getCapturedStartCoordinate());
+                    move = new Move(end.getPiece(),move.getCapturedPiece(),move.getStartCoordinate(),move.getEndCoordinate(),
+                            move.getCapturedStartCoordinate(), true);
                 }
                 end.getPiece().moved();
                 movedLast = end;
