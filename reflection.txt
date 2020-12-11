@@ -1,1 +1,11 @@
-
+What did you learn during this project?
+  We learned how to use GitHub collaboratively. Each person had their own branch to commit their changes. When ready, we rebase onto the main branch and submit a pull request to merge the code. Learned java.swing and java.awt packages to create and get user input from the window. Practiced View-Model-Controller code strucutre.
+  
+What did you enjoy during this project?
+  The finished product was satisfying to play (drag + drop is satisfying). Rewarding to see the chess pieces move according to how they were designed. 
+  
+What did you find challenging or frustrating during this project?
+  Keeping track of all of the classes, their features, and the connections between them got easily confusing. A single move eventually traverses through multiple classes, sometimes making debugging challenging. Merge conflicts and git problems in general were frustrating to resolve. Understanding other people's code can be difficult (since you didn't write it) so understanding what your code should deliver to their's can be confusing.
+  
+What did you find particularly helpful for your learning during this project?
+  StackOverflow (lol). Having lengthy discussions with each other about how classes/sections (View/Model/Controller) should communicate with each other and what information is passed between them. Watching YouTube videos to learn how to use new software or GitHub. 
