@@ -40,7 +40,8 @@ public class ChessGame {
      */
     public boolean makeMove(ChessCoordinate startCoordinate, ChessCoordinate endCoordinate) {
         boolean didMove = false;
-        if (!startCoordinate.equals(endCoordinate)) {
+        if (startCoordinate.isInBounds() && endCoordinate.isInBounds()
+                && !startCoordinate.equals(endCoordinate)) {
             ChessPiece piece = board.getPieceOnSquare(startCoordinate);
             if (piece != null && piece.getColor() == turn) {
                 Move lastMove = board.makeMove(

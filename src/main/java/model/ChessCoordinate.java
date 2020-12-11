@@ -21,6 +21,10 @@ public class ChessCoordinate {
         return rank;
     }
 
+    public boolean isInBounds() {
+        return (0 <= file && file <= 7) && (0 <= rank && rank <= 7);
+    }
+
     @Override
     public String toString() {
         return "ChessCoordinate{" +
